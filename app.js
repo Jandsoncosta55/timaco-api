@@ -23,6 +23,9 @@ const teamRoutes = require("./routes/team.routes");// ROTA DOS TIMES
 app.use("/team", teamRoutes);
 const playerRoutes = require("./routes/player.routes");// rota dos players
 app.use("/player", playerRoutes);
+const userRoutes = require("./routes/user.routes");// rota do usuario
+app.use("/users", userRoutes);
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

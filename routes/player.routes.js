@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const Player = require("../models/Player.model");
-router.post("/player", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { name, descriptions } = req.body;
   try {
     const playerFromDB = await Player.create({

@@ -3,7 +3,7 @@ const { throwError } = require("../utils/error.utils");
 
 // cria os times
 const Team = require("../models/Team.model");
-router.post("/team", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { title, descriptions } = req.body;
   try {
     const teamFromDB = await Team.create({ title, descriptions });
@@ -14,7 +14,7 @@ router.post("/team", async (req, res, next) => {
 });
 
 // retorna todos os times
-router.get("/team", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const teamFromDB = await Team.find();
     res.status(200).json(teamFromDB);
@@ -38,14 +38,11 @@ router.get("/:teamId", async (req, res, next) => {
   }
 });
 
-// edita um time específico
+// editar um time específico
 router.put("/:teamId", async (req, res, next) => {
   const { teamtId } = req.params;
   try {
     if (!mongoose.Types.teamId.isValid(teamtId)) {
-      // const error = new Error('Specified ID is not valid.');
-      // error.status = 400;
-      // throw error;
       throwError('Specified ID is not valid.', 400);
     }
     const teamFromDB = await Team.findByIdAndUpdate(teamtId, req.body, {
