@@ -17,16 +17,12 @@ require("./config")(app);
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
-
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
-
-// ROTA DOS TIMES
-const teamRoutes = require("./routes/team.routes");
-app.use("/home", teamRoutes);
-
-const playerRoutes = require("./routes/player.routes");
-app.use("/home", playerRoutes);
+const teamRoutes = require("./routes/team.routes");// ROTA DOS TIMES
+app.use("/team", teamRoutes);
+const playerRoutes = require("./routes/player.routes");// rota dos players
+app.use("/player", playerRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
