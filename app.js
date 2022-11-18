@@ -10,6 +10,7 @@ require("./db");
 const express = require("express");
 
 const app = express();
+const { isAuthenticated } = require("./middleware/jwt.middleware.js");
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
@@ -20,10 +21,11 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 const teamRoutes = require("./routes/team.routes");// ROTA DOS TIMES
-app.use("/team", teamRoutes);
+app.use("/team", isAuthenticated, teamRoutes);
 const playerRoutes = require("./routes/player.routes");// rota dos players
 app.use("/player", playerRoutes);
 const userRoutes = require("./routes/user.routes");// rota do usuario
+
 app.use("/users", userRoutes);
 
 
