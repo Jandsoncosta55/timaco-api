@@ -18,14 +18,17 @@ require("./config")(app);
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
+
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
 const teamRoutes = require("./routes/team.routes");// ROTA DOS TIMES
 app.use("/team", isAuthenticated, teamRoutes);
-const playerRoutes = require("./routes/player.routes");// rota dos players
-app.use("/player", playerRoutes);
-const userRoutes = require("./routes/user.routes");// rota do usuario
 
+const playerRoutes = require("./routes/player.routes");// rota dos players
+app.use("/player", isAuthenticated, playerRoutes);
+
+const userRoutes = require("./routes/user.routes");// rota do usuario
 app.use("/users", userRoutes);
 
 

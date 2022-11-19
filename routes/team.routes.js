@@ -5,7 +5,7 @@ const { throwError } = require("../utils/error.utils");
 
 const Team = require("../models/Team.model");
 
-// criar os times
+// criar um time
 router.post("/", async (req, res, next) => {
   const { title, descriptions } = req.body;
   try {
@@ -68,7 +68,7 @@ router.delete("/:teamId", async (req, res, next) => {
       // if (!mongoose.Types.ObjectId.isValid(teamId)) {
       //   throwError('Specified ID is not valid.', 400);
       // }
-      const teamtFromDB = await Team.findByIdAndRemove(teamId);
+      const teamtFromDB = await Team.findOneAndRemove({_id:teamId});
       res.status(204).json();
     } catch (error) {
       next(error);
