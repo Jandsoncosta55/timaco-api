@@ -37,9 +37,6 @@ router.get("/", async (req, res, next) => {
 router.put("/:playerId", async (req, res, next) => {
   const { playerId } = req.params;
   try {
-    // if (!mongoose.Types.playerId.isValid(playerId)) {
-    //   throwError('Specified ID is not valid.', 400);
-    // }
     const playerFromDB = await Player.findOneAndUpdate(
       { _id: playerId },
       req.body,
@@ -58,9 +55,6 @@ router.put("/:playerId", async (req, res, next) => {
 router.delete("/:playerId", async (req, res, next) => {
   const { playerId } = req.params;
   try {
-    // if (!mongoose.Types.ObjectId.isValid(playerId)) {
-    //   throwError('Specified ID is not valid.', 400);
-    // }
     const playerFromDB = await Player.findOneAndRemove(playerId);
     res.status(204).json();
   } catch (error) {

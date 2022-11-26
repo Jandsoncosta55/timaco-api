@@ -1,6 +1,4 @@
 const router = require("express").Router();
-const { throwError } = require("../utils/error.utils");
-// const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 const Team = require("../models/Team.model");
 
@@ -30,10 +28,6 @@ router.get("/:teamId", async (req, res, next) => {
   const { teamId } = req.params;
   console.log(teamId);
   try {
-    // valida se o teamId é um id que o mongo reconhece
-    // if (!mongoose.Types.ObjectId.isValid(teamtId)) {
-    //   throwError('Specified ID is not valid', 400);
-    // }
     const teamFromDB = await Team.findOne({ _id: teamId }).populate("players");
     res.status(200).json(teamFromDB);
   } catch (error) {
@@ -45,9 +39,6 @@ router.get("/:teamId", async (req, res, next) => {
 router.patch("/:teamId", async (req, res, next) => {
   const { teamId } = req.params;
   try {
-    // if (!mongoose.Types.teamId.isValid(teamtId)) {
-    //   throwError('Specified ID is not valid.', 400);
-    // }
     const teamFromDB = await Team.findOneAndUpdate(
       { _id: teamId },
       { $set: req.body },
@@ -68,10 +59,7 @@ router.patch("/:teamId", async (req, res, next) => {
 router.delete("/:teamId", async (req, res, next) => {
   const { teamId } = req.params;
   try {
-    // if (!mongoose.Types.ObjectId.isValid(teamId)) {
-    //   throwError('Specified ID is not valid.', 400);
-    // }
-    const teamtFromDB = await Team.findOneAndRemove({ _id: teamId });
+    const teamFromDB = await Team.findOneAndRemove({ _id: teamId });
     res.status(204).json();
   } catch (error) {
     next(error);
